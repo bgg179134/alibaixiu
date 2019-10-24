@@ -94,13 +94,15 @@ $("#deleteMany").on("click", function() {
     .find("input")
     .filter(":checked");
   checkedCategory.each(function(index, element) {
-    ids.push($(element).attr("dayta-id"));
+    ids.push($(element).attr("data-id"));
   });
+  console.log(ids);
   $.ajax({
     type: "delete",
     url: "/categories/" + ids.join("-"),
     success: function(response) {
-      location.reload();
+      // location.reload();
+      location.href = "/admin/categories.html";
     }
   });
 });

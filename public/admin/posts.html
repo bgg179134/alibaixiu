@@ -1,3 +1,7 @@
+<script src="/login/status"></script>
+<script>
+  if (!isLogin) location.href = "login.html";
+</script>
 <!DOCTYPE html>
 <html lang="zh-CN">
   <head>
@@ -124,6 +128,7 @@
     <script src="../assets/vendors/bootstrap/js/bootstrap.js"></script>
     <script src="../assets/vendors/art-template/template-web.js"></script>
     <script src="../assets/js/posts.js"></script>
+    <script src="../assets/js/common.js"></script>
     <script>
       NProgress.done();
     </script>
@@ -131,13 +136,13 @@
       {{each records}}
       <tr>
         <td>{{$value.title}}</td>
-        <td>{{$value.author.nikeName}}</td>
+         <td>{{$value.author.nickName}}</td>
         <td>{{$value.category.title}}</td>
         <td class="text-center">{{$value.createAt.split("T")[0]}}</td>
         <td class="text-center">{{$value.state==1 ? "已发布" : "草稿"}}</td>
         <td class="text-center">
-          <a href="javascript:;" class="btn btn-default btn-xs">编辑</a>
-          <a href="javascript:;" class="btn btn-danger btn-xs">删除</a>
+          <a href="post-add.html?id={{$value._id}}" class="btn btn-default btn-xs edit" data-id="{{$value._id}}">编辑</a>
+          <a href="javascript:;" class="btn btn-danger btn-xs delete" data-id="{{$value._id}}">删除</a>
         </td>
       </tr>
       {{/each}}
@@ -162,5 +167,7 @@
       <option value="{{$value._id}}">{{$value.title}}</option>
       {{/each}}
     </script>
+
+    <!-- 修改模板 -->
   </body>
 </html>

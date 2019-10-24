@@ -39,12 +39,12 @@ $.ajax({
 
 //文章筛选
 $("#filterForm").on("submit", function() {
-  var formFata = $(this).serialize();
-  console.log(formFata);
+  var formData = $(this).serialize();
+  console.log(formData);
   $.ajax({
     type: "get",
     url: "/posts",
-    data: formFata,
+    data: formData,
     success: function(response) {
       console.log(response);
       var html = template("postListTpl", response);
@@ -54,4 +54,15 @@ $("#filterForm").on("submit", function() {
     }
   });
   return false;
+});
+
+$("#postsListBox").on("click", ".delete", function() {
+  var id = $(this).attr("data-id");
+  $.ajax({
+    type: "delete",
+    url: "/posts/" + id,
+    success: function(response) {
+      location.reload();
+    }
+  });
 });
